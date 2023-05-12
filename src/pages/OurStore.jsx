@@ -2,11 +2,12 @@ import { NavBar } from "../components"
 
 const OurStore = () => {
   return (
-  
-    <div>
+  <>
     <NavBar/>
-    
-    OurStore</div>
+    <div className="mt-[5rem]">
+    <h1 className="text-3xl font-medium text-center tracking-tight">Our Store</h1>
+    </div>
+  </>
   )
 }
 

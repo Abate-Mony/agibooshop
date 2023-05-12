@@ -1,4 +1,4 @@
-import { Home, OurStore, Product } from './pages';
+import { Categories, Home, OurStore, Product,Cart } from './pages';
 import { Footer, NavBar, SideBar } from './components';
 import { Routes, Route } from 'react-router-dom'
 function App() {
@@ -9,6 +9,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/ourstore' element={<OurStore />} />
+        <Route path='/categories' element={<Categories />} />
+        <Route path='/cart' element={<Cart />} />
         <Route path='/product/:id' element={<Product/>} />
       </Routes>
     </div>

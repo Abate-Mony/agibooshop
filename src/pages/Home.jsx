@@ -9,7 +9,7 @@ import "swiper/css/a11y"
 import { useEffect, useState } from "react"
 import {NavFooter} from '../components'
 import {motion} from 'framer-motion'
-
+import Marquee from 'react-fast-marquee'
 const Home = () => {
 const [activeSlide,setActiveSlide]=useState(0);
   return (
@@ -42,8 +42,10 @@ const [activeSlide,setActiveSlide]=useState(0);
       <div className="flex flex-nowwrap overflow-x-auto">
         {Array.from({ length: 5 }, (arr, index) => <ProductCard l />)}
       </div>
-      
-      
+<Marquee className="my-4" >
+here at agibooshop customer priority comes first 
+
+</Marquee>      
       <h1 className="text-4xl text-center my-4 leading-10">Products</h1>
       <div className="flex flex-wrap">
         {Array.from({ length: 10 }, (arr, index) => <ProductCard />)}
