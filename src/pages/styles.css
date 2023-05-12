@@ -1,0 +1,3 @@
+.mySwiper .swiper-slide-thumb-active {
+    @apply text-black font-medium border-b-2 border-black
+}
