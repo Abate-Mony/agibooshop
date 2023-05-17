@@ -1,13 +1,26 @@
 import ReactStars from 'react-rating-stars-component'
 import { useNavigate } from 'react-router-dom'
-const ProductCard = ({ imgUrl, name, price,l }) => {
+import {motion} from "framer-motion"
+import { useEffect } from 'react'
+const ProductCard = ({ imgUrl, name, price,l ,r,id}) => {
 const navigate=useNavigate()
-  return (
-    <div
-    onClick={()=>navigate("/product/3")}
-    className={`flex-none ${l?"w-[55%]":"w-1/2"} sm:w-1/3 md:w-1/3  lg:w-1/5 p-2`}>
+useEffect(() => {
+  
+window.scrollTo({top:0,behavior:"smooth"})
+  return () => {
+  }
+}, [window.location.href])
 
-      <div className=' min-h-[200px]  flex- items-center justify-center  rounded- shadow-lg  bg-white'>
+  return (
+    <motion.div
+    
+    whileInView={{y:0,opacity:1}}
+    initial={{y:10,opacity:0}}
+    
+    onClick={()=>navigate("/product/"+id)}
+    className={`flex-none ${l?"w-[55%]":"w-1/2"}  sm:w-1/3 md:w-1/3  lg:w-1/5 p-2`}>
+
+      <div className={` min-h-[200px]  flex- items-center justify-center ${r?"rounded-lg":""}  rounded- shadow-lg  bg-white`}>
         <div className="relative mb-2  h-[10rem] overflow-hidden">
           <img
             className="w-full h-full"
@@ -41,7 +54,7 @@ const navigate=useNavigate()
 
 
       </div>
-    </div>
+    </motion.div>
   )
 }
 

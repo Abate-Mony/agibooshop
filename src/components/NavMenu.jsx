@@ -3,8 +3,8 @@ import {useNavigate} from 'react-router-dom'
 const list=[
 {value:"Home",link:"/"},
 {value:"OurStore",link:"/ourstore"},
-{value:"contact us",link:"/"},
-{value:"About us",link:"/"},
+{value:"contact us",link:"/about-us"},
+{value:"About us",link:"/contact-us"},
 ]
 const NavMenu = () => {
 const navigate=useNavigate();

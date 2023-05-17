@@ -31,7 +31,7 @@ const navigate=useNavigate();
     },
     {
 
-      value: "Whatsapp ", link: "/"
+      value: "Whatsapp Us", link: "/"
     },
 
     // "Home","Store","Contact Us","About Us","whatSapp us"

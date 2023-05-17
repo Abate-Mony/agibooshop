@@ -12,10 +12,10 @@ const Cart = () => {
             </div>
 
             
-            <div className="bottom-0 z-10 w-full md:flex md:max-w-3xl md:rounded-lg mx-auto fixed bg-slate-200 py-4 pb-0 min-h-[100px] shadow  left-0 right-0">
+            <div className="bottom-0 z-10 w-full md:flex md:max-w-3xl md:rounded-lg mx-auto fixed bg-white rounded-t-2xl py-4 pb-0 min-h-[100px] shadow-2xl  left-0 right-0">
 
                 <div className="flex items-center justify-between px-4 mb-6 md:gap-10" >
-                    <h1 className="text-black text-xl font-semibold ">Total</h1>
+                    <h1 className="text-black text-xl font-semibold md:mb-4">Total</h1>
                     <h1 className="text-3xl  font-medium  tracking-tight italic">2,929 <sup className="text-slate-400 text-lg">frs</sup></h1>
                 </div>
                 <button type="button" class="text-white text-center bg-black  mb-5

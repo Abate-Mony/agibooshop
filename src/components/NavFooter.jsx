@@ -2,8 +2,12 @@ import { MdShoppingBasket, MdHome,MdFavorite } from "react-icons/md"
 import { AiOutlineShoppingCart,AiOutlineMessage } from "react-icons/ai"
 import {BiCategoryAlt} from 'react-icons/bi'
 import { useNavigate } from "react-router-dom"
+import { useSelector,useDispatch } from "react-redux"
+import { toggleMessage as toggle } from "../actions/openMessageBox";
 const NavFooter = () => {
-const navigate=useNavigate()
+const navigate=useNavigate();
+const dispatch=useDispatch()
+const toggleMessage=()=>dispatch(toggle());
 
     return (
         <div
@@ -22,6 +26,7 @@ const navigate=useNavigate()
                 </span>
                 <span className="justify-center font-montserrat font-medium tracking-tight bg-black relative shadow sm:shadow-2xl  flex-none h-[60px] rounded-full mt-[-25px] sm:mr-[-60px] sm:w-[60px]  sm:mt-0 text-white hover:bg-opacity-80 transition-all duration-300  w-[60px]  items-center flex flex-col " onClick={()=>navigate("/cart")} >
                     <AiOutlineShoppingCart size={25} />
+                    {/* <img src="https://loading.io/icon/5aaxsn" alt="cart img"  className="h-10 w-10"/> */}
                     <p className="text-xs font-montserrat font-medium text-slate-900 tracking-tight leading-normal select-none">Cart</p>
                     <div className="absolute -top-0 text-white -right-0 w-4 h-4 flex justify-center items-center rounded-full text-xs bg-red-400">0</div>
                 </span>
@@ -29,7 +34,7 @@ const navigate=useNavigate()
                     <MdFavorite size={25} />
                     <p className="text-xs font-montserrat font-medium text-slate-900 tracking-tight leading-normal select-none">wishlist</p>
                 </span>
-                <span className="justify-center font-montserrat font-medium tracking-tight w-1/5  items-center flex flex-col ">
+                <span className="justify-center font-montserrat font-medium tracking-tight w-1/5  items-center flex flex-col " onClick={toggleMessage}>
                     <AiOutlineMessage size={25} />
                     <p className="text-xs font-montserrat font-medium text-slate-900 tracking-tight leading-normal select-none">message</p>
                 </span>
