@@ -24,13 +24,18 @@ const Home = () => {
   }, [])
 
   const [activeSlide, setActiveSlide] = useState(0);
+  // const [error, setError] = useState(false);
   const [toggle, setToggle] = useState(false);
   const ref = useRef(null)
   const isInView = useInView(ref)
   const confirmfunction = () => {
     if (true) {
-      alert("ok ");
-      setToggle(false)
+      if (window.confirm("confirm the code ")) {
+
+        setToggle(false)
+        return
+      }
+      // setError(true)
     }
 
   }
@@ -59,13 +64,13 @@ const Home = () => {
               initial={false}
               animate={{ y: activeSlide == index ? 0 : 100, opacity: activeSlide == index ? 1 : 0 }}
               src={arr}
-              className="h-[17rem] md:h-[25rem] w-full" alt="banner" />
+              className="h-[17rem] md:h-[25rem] lg:h-[30rem] w-full" alt="banner" />
           </SwiperSlide>
         ))}
       </Swiper>
       <Brand />
       <NavMenu />
-      <Popup toggle={toggle} confirmFunc={confirmfunction} closeModal={setToggle} >
+      <Popup toggle={toggle} confirmFunc={confirmfunction} closeModal={setToggle}  >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque itaque aliquam sequi at deserunt quis vitae placeat, qui labore reiciendis voluptates earum aspernatur provident similique repellendus eaque dolores, praesentium sit!
 
 

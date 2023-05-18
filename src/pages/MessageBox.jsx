@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux"
 import { toggleMessage as toggle } from "../actions/openMessageBox";
-import { MdOutlineMenu, MdClose } from 'react-icons/md'
+import { MdOutlineMenu, MdClose ,MdOutlineClose} from 'react-icons/md'
+// import {Ioclose} from 'react-icons/io'
 import { useState, useEffect } from 'react'
 const MessageBox = () => {
     const isMessage = useSelector(state => state.message.isOpen);
@@ -29,7 +30,7 @@ const MessageBox = () => {
     return (
         <div className={`fixed  z-[12] flex flex-col ${isMessage ? "visible opacity-100 pointer-events-auto translate-y-0 right-0" : "invisible pointer-events-none translate-y-1 opacity-0 -right-12"} transition-all duration-300 shadow-emerald-50 shadow   w-full md:w-[500px] h-[calc(100%-7rem)] md:h-[calc(100%-4rem)] top-0 md:max-w-[calc(100vw-2.5rem)] bg-white`}>
 
-            <div className={`absolute ${isOpen ? "visible pointer-events-auto opacity-100 scale-100 duration-500 left-4" : "duration-100 invisible pointer-events-none opacity-0 scale-0 "} transition-all max-w-[250px] min-h-[10rem] rounded-md shadow left-2 bg-slate-200 shadow-emerald-100 w-full  top-[4.5rem]`}>
+            <div className={`absolute ${isOpen ? "visible pointer-events-auto opacity-100 scale-100 duration-500 left-4" : "duration-100 invisible pointer-events-none opacity-0 scale-0 "} transition-all max-w-[250px] min-h-[10rem] rounded-md shadow left-2 bg-slate-200  w-full  top-[4.5rem]`}>
                 <div
                     // onClick={() => toggleMessage()}
                     className="w-8 h-8 flex-none top-0 bg-orange-900 grid  place-items-center  -right-8  absolute ">
@@ -39,12 +40,12 @@ const MessageBox = () => {
                 </div>
 
 
-                <h1 className="text-center flex-1 text-lg 0 py-2 font-medium  shadow-slate-800 mt-2 mb-2">Our Social Accounts </h1>
+                <h1 className="text-center flex-1 text-lg 0 py-2 font-medium  font-montserrat shadow-slate-800 mt-2 mb-2">Our Social Accounts </h1>
 
-                <div className="flex flex-wrap gap-x-4 gap-y-4 mb-4 px-2">
+                <div className="flex flex-wrap gap-x-2 gap-y-4 mb-4 justify-center px-4">
                     {
                         [1, 2, 4, 5, 1, 6].map(() => (<div
-                            className="w-10 h-10 flex-none bg-orange-900  shadow shadow-emerald-200 rounded-full "></div>
+                            className="w-10 h-10 flex-none bg-orange-900  shadow  rounded-full "></div>
                         ))
 
                     }
@@ -53,11 +54,14 @@ const MessageBox = () => {
             </div>
             <div
                 onClick={() => toggleMessage()}
-                className="w-12 h-12 flex-none bg-orange-900  ring-4 rounded-full right-4 md:left-1/2 md:-translate-x-1/2 -bottom-7 absolute "></div>
+                className="w-10    h-10 md:h-12 md:w-12 cursor-pointer  flex-none grid place-items-center ring-red-400   ring-4 rounded-full right-4 md:left-1/2 md:-translate-x-1/2 -bottom-7 absolute ">
+                <MdOutlineClose size={30} color="red"/> 
+                
+                </div>
 
-            <div className="flex items-center px-2">
+            <div className="flex items-center px-2 shadow drop-shadow-2xl mb-3">
 
-                <h1 className="text-center flex-1 text-xl py-2  shadow-slate-800 mt-4 mb-2">Message box </h1>
+                <h1 className="text-center flex-1 text-xl py-2 font-montserrat shadow-slate-800 mt-4 mb-2">Message box </h1>
 
                 <div className="w-12 ml-2 h-12 rounded-f relative flex-none flex items-center justify-center bg-white shadow-xl"
 
@@ -75,9 +79,9 @@ const MessageBox = () => {
 
                     }                </div>
             </div>
-            <div className="flex-1 overflow-y-auto px-4">
+            <div className="flex-1 overflow-y-auto px-4 font-montserrat">
                 {
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((t, i) => (i & 1 ? <div className="max-w-[90%] leading-4 border rounded-lg w-fit px-3 py-1 mb-2 bg-slate-100 ">hello susan are same code  </div> : <div className="max-w-[90%] leading-5 bg-blue-300 ml-auto border rounded-lg w-fit px-3 py-1 mb-2 ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, quam.</div>))
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((t, i) => (i & 1 ? <div className="max-w-[90%] leading-4 border rounded-lg w-fit px-3 py-1 mb-2 bg-slate-100 text-sm">hello susan are same code  </div> : <div className="max-w-[90%] text-sm leading-5 bg-blue-300 ml-auto border rounded-lg w-fit px-3 py-1 mb-2 ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, quam.</div>))
 
                 }
             </div>

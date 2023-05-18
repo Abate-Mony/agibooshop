@@ -13,7 +13,7 @@ const navigate=useNavigate();
     <ul className='flex flex-wrap'>
 
     {list.map((arr,index)=>(
-      <li key={index} className='mx-2 text-blue-900 font-montserrat text-md hover:text-blue-400 select-none 
+      <li key={index} className='mx-2 text-blue-900 font-montserrat text-lg md:text-xl hover:text-blue-400 select-none 
       transition-colors duration-500
       '
       

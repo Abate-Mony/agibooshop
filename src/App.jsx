@@ -1,6 +1,7 @@
 import { Categories, Home, OurStore, Product,Cart,AboutUs, ContactUs ,MessageBox} from './pages';
 import { Footer, NavBar, NavFooter, SideBar } from './components';
 import { Routes, Route } from 'react-router-dom'
+import User from "./pages/User"
 function App() {
   return (
     <div className="container mx-auto  md:px-0">
@@ -16,6 +17,7 @@ function App() {
         <Route path='/about-us' element={<AboutUs />} />
         <Route path='/contact-us' element={<ContactUs />} />
         <Route path='/product/:id' element={<Product/>} />
+        <Route path='/user' element={<User/>} />
       </Routes>
     </div>
   );

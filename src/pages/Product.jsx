@@ -1,4 +1,4 @@
-import { AiOutlineArrowLeft, AiOutlineShoppingCart } from "react-icons/ai"
+import { AiOutlineShoppingCart } from "react-icons/ai"
 import { ProductCard, Review, TopBar } from '../components'
 // import { MdOutlineArrowLeft } from "react-icons/md"
 import { useNavigate } from "react-router-dom"
@@ -9,8 +9,10 @@ import "./styles.css";
 import { FreeMode, Navigation, Pagination, Scrollbar, A11y, Autoplay, Thumbs } from "swiper";
 
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import ReactStars from 'react-rating-stars-component'
+// import {Popup}
+import { Popup } from '../components'
 
 import Select from 'react-select'
 import "swiper/css"
@@ -25,20 +27,41 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/scrollbar"
 const Product = () => {
+    const imgRef = useRef(null)
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
-
+    const [selected, setSelected] = useState(null)
     const [number, setNumber] = useState(1)
     const options = Array.from({ length: 10 }, (arr, i) => ({ value: i + 1, label: i + 1 }))
     const navigate = useNavigate()
     const [activeSlide, setActiveSlide] = useState(0);
+    const [toggle, setToggle] = useState(false)
+    const confirm = () => {
+        setToggle(false)
+        window.scrollTo({
+            top:80,
+            behavior: "smooth"
+        })
+        
+        imgRef.current.classList.add("border","bg-orange-400")
+        setTimeout(()=>{
+            imgRef.current.classList.remove("border","bg-orange-400")
+        
+        
+        },2000)
+    }
     return (
         <motion.div
             initial={{ y: 40 }}
             animate={{ y: 0 }}
-            className="min-h-screen pb-[10rem] mySwiper">
+            className="min-h-screen pb-[10rem] mySwiper select-none">
 
 
             <TopBar name={"hair center"} />
+            <Popup toggle={toggle} closeModal={setToggle} confirm confirmFunc={confirm}>
+                Please select a hair color and continue
+
+
+            </Popup>
             <div className="md:flex  mt-6 ">
                 <Swiper className="flex-1"
 
@@ -47,7 +70,7 @@ const Product = () => {
                     modules={[Navigation, Pagination, A11y, Scrollbar]}
                     pagination={{ clickable: true }}
                 >
-                    {["https://www.clawigs.com/image/cache/catalog/banner/old_women-1140x380.gif", "https://www.clawigs.com/image/cache/catalog/banner/lace-1140x380.jpg", "https://www.clawigs.com/image/cache/catalog/banner/human-2023-1140x380.jpg", "https://www.clawigs.com/image/cache/catalog/banner/wig-1140x380.jpg"].map((arr, index) => (
+                    {["https://www.clawigs.com/image/cache/catalog/wigs/w901555592591-1-163x216.jpg", "https://www.clawigs.com/image/cache/catalog/wigs/w901555657711-1-163x216.jpg", "https://www.clawigs.com/image/cache/catalog/wigs/w901555577492-1-300x397.jpg", "https://www.clawigs.com/image/cache/catalog/wigs/w901555577492-1-300x397.jpg"].map((arr, index) => (
                         <SwiperSlide className="min-h-[150px] flex-none"  >
                             <motion.img
                                 animate={{
@@ -82,29 +105,76 @@ const Product = () => {
                     <p className="mb-2 leading-snug text-sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur reprehenderit obcaecati vitae voluptatum quisquam nam doloribus cupiditate eligendi sunt eveniet?</p>
 
                     <h2 className="text-2xl text-center font-medium font-montserrat mb-4">Brazilian hair</h2>
+                    <h2 className="text-montserrat font-medium w-[400px] max-w-[calc(100%-2.5rem)] mx-auto mb-2 ">Select Color</h2>
+                    <div ref={imgRef} className="flex py-2 px-1 transition-all duration-500 flex-wrap gap-x-2 gap-y-1 mb-4  w-[400px] max-w-[calc(100%-2.5rem)] mx-auto">
+                        {
+                            [
+                                "https://www.clawigs.com/image/cache/catalog/synthetic-color/1B-60x80.jpg",
+                                "https://www.clawigs.com/image/cache/catalog/synthetic-color/12-60x80.jpg",
+                                "https://www.clawigs.com/image/cache/catalog/synthetic-color/2-60x80.jpg",
+                                "https://www.clawigs.com/image/cache/catalog/synthetic-color/29-60x80.jpg",
+                                "https://www.clawigs.com/image/cache/catalog/synthetic-color/672B-60x80.jpg",
+                                "https://www.clawigs.com/image/cache/catalog/synthetic-color/102-60x80.jpg"
+
+                            ].map((url, index) => (
+                                <motion.div
+                                    initial={false}
+                                    animate={{ scale: selected == index ? [0.8, 1, 0.9] : null }}
+                                    transition={{
+                                        duration: 1,
+                                        ease: "easeInOut",
+                                        // times: [0, 0.2, 0.5, 0.8, 1],
+                                        repeat: Infinity,
+                                        // repeatDelay: 1
+
+                                    }
+
+                                    }
+                                    onClick={() => {
+                                        setSelected(index)
+                                        if ("navigator" in window && selected != index) {
+                                            window.navigator.vibrate([60])
+
+                                        }
+                                    }}
+
+                                    className={`w-[3rem] h-[3rem] cursor-pointer ${selected === index ? "border border-orange-500" : ""}`}>  <img src={url} className="w-full h-full rounded-lg shadow" alt="color" /></motion.div>
+                            ))
+
+
+                        }
+                    </div>
                     <h2 className="text-montserrat font-medium w-[400px] max-w-[calc(100%-2.5rem)] mx-auto mb-2 ">Select Quantity</h2>
 
                     <div className="flex min-h-[3rem] mb-2 items-center w-[400px] max-w-[calc(100%-2.5rem)] mx-auto">
 
-                        <Select defaultValue={number} options={options} className="mb- w-[8rem] rounded-none ring-0 flex-1- h-full mx-auto" />
+                        <Select defaultValue={1} options={options} className="mb- w-[8rem] rounded-none ring-0 flex-1- h-full mx-auto" />
 
                         <button type="button" class="text-white text-center  flex-1 bg-black mb-
             focus:outline-none  mx-auto block
                     
-                    hover:bg-slate-900 hover:text-white  font-medium rounded-none text-sm px-3 py-2 ">Add to cart <AiOutlineShoppingCart className="inline-block ml-2" size={20} /> </button>
+                    hover:bg-slate-900 hover:text-white  font-medium rounded-none text-sm px-3 py-2 "
+                            onClick={() => {
+                                if (selected == null) {
+
+                                    setToggle(true)
+
+                                }
+                            }}
+                        >Add to cart <AiOutlineShoppingCart className="inline-block ml-2" size={20} /> </button>
 
                     </div>
 
                     <div className="flex w-[400px] mx-auto  gap-x-2 max-w-[calc(100%-2.5rem)]">
-                    <button type="button" class="text-white text-center bg-black mb-2
+                        <button type="button" class="text-white text-center bg-black mb-2
             focus:outline-none flex-1 mx-auto block
              hover:bg-slate-900 hover:text-white text-xs  font-medium rounded-none  px-3 py-2 " onClick={() => navigate("/cart")} >Add to Wishlist</button>
-<button type="button" class="text-white text-center bg-black mb-2
+                        <button type="button" class="text-white text-center bg-black mb-2
             focus:outline-none flex-1 mx-auto block
              hover:bg-slate-900 hover:text-white text-xs  font-medium rounded-none  px-3 py-2 " onClick={() => navigate("/cart")} >View Cart</button>
 
-                    
-                    
+
+
                     </div>
                     <button type="button" class="text-white text-center bg-black  mb-6
             focus:outline-none w-[400px] max-w-[calc(100%-2.5rem)] mx-auto block
@@ -122,7 +192,7 @@ const Product = () => {
                     scrollbar={{ draggable: true }}
 
                     modules={[FreeMode, Navigation, Thumbs, Scrollbar]}
-                    className="mySwiper"
+                    className="mySwiper mt-4"
                 // breakpoints={{
                 //     640: {
                 //         slidesPerView: 2,
@@ -167,41 +237,105 @@ const Product = () => {
                 thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
                 scrollbar={true}
                 // modules={[FreeMode,  Thumbs]}
-                className="mySwiper2 "
+                className="mySwiper2 max-w-6xl"
                 slidesPerView={1}
             >
 
                 <SwiperSlide >
-                    <div className=" bg-slate-200">
+                    <div className=" ">
 
-                        PRPDUCT DETAILS
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide >
-                    <div className="border bg-slate-200 flex flex-col mt-4 ">
-                    <form className={` bg-transparent w-[25rem] items-center flex max-w-[calc(100vw-2.5rem)] mb-4 mt-4 lg:w-full lg:max-w-3xl mx-auto`}>
-          <div class="relative bg-transparent shadow bg-white flex-1 rounded-2xl">
-            {/* <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            </div> */}
-            <input type="text"
-              class="block w-full p-4 pl-10  text-sm rounded-lg hover:outline-none hover:shadow-2xl text-gray-900 border- border-gray-300 rounded-lg- bg-transparent focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700- dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={`Write comments`} required />
-            <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Comment</button>
-          </div>
-       
-        </form>
-                        {/* <div className="div flex-none min-h-[2.5rem] border-4 border-orange-500">write your own reviw</div> */}
-                        <div className="flex flex-wrap flex-1 overflow-y-initial">
-                        
-                        {
-                            [1, 2, 4, 5, 6].map((i) => <Review />)
+                        <h1 className="text-2xl font-medium font-montserrat text-center mt-2 mb-4 tracking-tighter italic">PRODUCT DETAILS</h1>
+                        <h2 className="text-2xl text- pl-4 font-medium font-montserrat mb-4">Brazilian hair</h2>
 
-                        }
+                        <div className="px-4 tracking-tight leading-6 text-sm md:text-lg">
+                            <p >Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, sint animi ab expedita tempore dolorem maxime cupiditate, consectetur eligendi magni laboriosam? Placeat, ex iste. A itaque molestias odit nostrum iure vel, blanditiis repellat repudiandae! Porro aperiam excepturi ipsum velit temporibus.</p>
+                            <h2 className="text-2xl text- pl-4 font-medium font-montserrat mb-2 mt-2">Information</h2>
+
+                            <ul className="pl-4 mb-4">
+                                <li className="list-disc ml-4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam, est?</li>
+                                <li className="list-disc ml-4">Lor consectetur adipisicing elit. Ipsam, est?</li>
+                                <li className="list-disc ml-4">Lorem ipsumit. Ipsam, est?</li>
+                                <li className="list-disc ml-4">Lorem ipsum, dolor sit amet consectst?</li>
+
+                            </ul>
+
+                            <h2 className="text-2xl text- pl-4 font-medium font-montserrat mb-4">Available Colors</h2>
+
+                            <div className="flex flex-wrap gap-x-4 gap-y-2">
+                                <div className="w-[6rem] h-[6rem] ">  <img src="https://www.clawigs.com/image/cache/catalog/synthetic-color/1B-60x80.jpg" className="w-full h-full" alt="color" /></div>
+                                <div className="w-[6rem] h-[6rem] ">  <img src="https://www.clawigs.com/image/cache/catalog/synthetic-color/1B-60x80.jpg" className="w-full h-full" alt="color" /></div>
+                                <div className="w-[6rem] h-[6rem] ">  <img src="https://www.clawigs.com/image/cache/catalog/synthetic-color/1B-60x80.jpg" className="w-full h-full" alt="color" /></div>
+                                <div className="w-[6rem] h-[6rem] ">  <img src="https://www.clawigs.com/image/cache/catalog/synthetic-color/1B-60x80.jpg" className="w-full h-full" alt="color" /></div>
+
+                            </div>
                         </div>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide >
-                    <div className=" bg-slate-200">
+                    <div className="border  flex flex-col pt-5 ">
+                    <h2 className="text-montserrat text-lg text-center font-medium w-[400px] max-w-[calc(100%-2.5rem)] mx-auto mb-2 ">Write A Recieve about product</h2>
+                        
+                    <form className="mx-4 my-10 mt-4 shadow pb-8 ">
+                    <h2 className="text-montserrat font-medium w-[400px] max-w-[calc(100%-2.5rem)] mx-auto mb-2 ">Select Star Rating</h2>
+               
+                    <div class="form-group mb-6  
+                    
+                    w-[400px] mx-auto  gap-x-2 max-w-[calc(100%-2.5rem)]
+                    
+                    ">
+                      <textarea class="
+                      form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                    " id="exampleFormControlTextarea13" rows="3" placeholder="Message"></textarea>
+                    </div>
+              
+                    <button type="submit" class="
+                    block
+                    px-6
+                    py-2.5
+                    bg-blue-600
+                    text-white
+                    font-medium
+                    text-xs
+                    leading-tight
+                    uppercase
+                    rounded
+                    shadow-md
+                    hover:bg-blue-700 hover:shadow-lg
+                    focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
+                    active:bg-blue-800 active:shadow-lg
+                    transition
+                    duration-150
+                    w-[200px] mx-auto  gap-x-2 max-w-[calc(100%-2.5rem)]
+                    
+                    ease-in-out">Send</button>
+                  </form>
+                        
+                        {/* <div className="div flex-none min-h-[2.5rem] border-4 border-orange-500">write your own reviw</div> */}
+                        <div className="flex flex-wrap flex-1 overflow-y-initial">
+
+                            {
+                                [1, 2, 4, 5].map((i) => <Review />)
+
+                            }
+                        </div>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide >
+                    <div className=" ">
 
                         CONTACT SELLTER
                     </div>
@@ -209,17 +343,17 @@ const Product = () => {
 
 
             </Swiper>
-            
+
             <h1 className="text-2xl font-medium mb-4 mt-6 text-center font-montserrat">Related Product</h1>
             <div className="flex flex-nowwrap overflow-x-auto overflow-y-hidden">
-        {Array.from({ length: 8 }, (arr, index) => <ProductCard l r id={index} />)}
-        
-      </div>
-      <h1 className="text-2xl font-medium mb-4 mt-6 text-center font-montserrat">New Arrival </h1>
-      
+                {Array.from({ length: 8 }, (arr, index) => <ProductCard l r id={index} />)}
+
+            </div>
+            <h1 className="text-2xl font-medium mb-4 mt-6 text-center font-montserrat">New Arrival </h1>
+
             <div className="flex flex-wrap overflow-y-hidden">
-        {Array.from({ length: 8 }, (arr, index) => <ProductCard  r id={index} />)}
-      </div>
+                {Array.from({ length: 8 }, (arr, index) => <ProductCard r id={index} />)}
+            </div>
         </motion.div>
     )
 }

@@ -1,8 +1,7 @@
-// /.KNL  N           N// import {AiOutlineMessage} from 'react-icons/ai'
-// import { MdMenu } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState, useRef } from 'react'
 import { MdOutlineMenu } from 'react-icons/md'
+import { BsMoon } from 'react-icons/bs'
 import { actions } from '../actions/openSidebar'
 const NavBar = ({isInView}) => {
   const [index, setIndex] = useState(0);
@@ -43,7 +42,7 @@ const NavBar = ({isInView}) => {
             // onClick={toggleSideBar}
           >
             <MdOutlineMenu size={30}  onClick={toggleSideBar} />
-            <span className={`w-8 bg-black h-8 rounded-full border border-black transition-all duration-700 absolute top-14 ${isInView?"visible opacity-100 ":"invisible opacity-0 pointer-event-none"}`}></span>
+            <span className={`w-10 h-10 grid place-items-center bg-white rounded-full shadow cursor-pointer transition-all duration-700 absolute top-14 ${isInView?"visible opacity-100 ":"invisible opacity-0 pointer-event-none"}`}> <BsMoon size={30} /></span>
           </div>
         </form>
 

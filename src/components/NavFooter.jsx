@@ -1,5 +1,5 @@
 import { MdShoppingBasket, MdHome,MdFavorite } from "react-icons/md"
-import { AiOutlineShoppingCart,AiOutlineMessage } from "react-icons/ai"
+import { AiOutlineShoppingCart,AiOutlineMessage, AiOutlineUser } from "react-icons/ai"
 import {BiCategoryAlt} from 'react-icons/bi'
 import { useNavigate } from "react-router-dom"
 import { useSelector,useDispatch } from "react-redux"
@@ -30,9 +30,9 @@ const toggleMessage=()=>dispatch(toggle());
                     <p className="text-xs font-montserrat font-medium text-slate-900 tracking-tight leading-normal select-none">Cart</p>
                     <div className="absolute -top-0 text-white -right-0 w-4 h-4 flex justify-center items-center rounded-full text-xs bg-red-400">0</div>
                 </span>
-                <span className="justify-center font-montserrat font-medium tracking-tight w-1/5  items-center flex flex-col ">
-                    <MdFavorite size={25} />
-                    <p className="text-xs font-montserrat font-medium text-slate-900 tracking-tight leading-normal select-none">wishlist</p>
+                <span className="justify-center font-montserrat font-medium tracking-tight w-1/5  items-center flex flex-col " onClick={()=>navigate("/user")}>
+                    <AiOutlineUser size={25} />
+                    <p className="text-xs font-montserrat font-medium text-slate-900 tracking-tight leading-normal select-none">user</p>
                 </span>
                 <span className="justify-center font-montserrat font-medium tracking-tight w-1/5  items-center flex flex-col " onClick={toggleMessage}>
                     <AiOutlineMessage size={25} />
