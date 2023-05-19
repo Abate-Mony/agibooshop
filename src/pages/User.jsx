@@ -15,8 +15,39 @@ const User = () => {
     return (
         <div>
             <TopBar name="user " />
-            <h1> Welcome Back </h1>
-            <h1> User </h1>
+
+            <div className="flex justify-between items-center px-4 mt-4 mb-4">
+                <div><h1> Welcome Back </h1>
+                    <h1 className="text-xl font-medium font-montserrat pl-3 mb-4"> User Manfred </h1>
+                </div>
+                <div>
+                <button
+                                        type="button"
+                                        a data-te-ripple-init
+                                        data-te-ripple-color="light"
+                                        className="inline-block rounded-none  bg-red-400 px-4 pb-2 pt-2 w-fit my-4 mt-0 text-xs font-medium uppercase
+leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150
+ease-in-out hover:bg-primary-600 mx-auto
+hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]
+focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]
+focus:outline-none focus:ring-0 active:bg-primary-700
+active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] 
+dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                                        onClick={() => {
+                                            if (window.confirm("do you want to logout out")) {
+                                                // setIslogin(false)
+                                                localStorage.token = ""
+                                                // navigate("/login")
+                                            }
+                                        }}
+                                    >
+                                        LogOut
+                                    </button>
+
+
+                </div>
+
+            </div>
             <Swiper
                 slidesPerView={1.2}
                 onSlideChange={(e) => setActiveSlide(e.activeIndex)}
@@ -29,12 +60,12 @@ const User = () => {
                 pagination={true}
                 // navigation={true}
                 spaceBetween={4}
-                
+
                 breakpoints={{
                     786: {
                         slidesPerView: 2,
                     },
-                    
+
 
 
                 }}
@@ -43,7 +74,7 @@ const User = () => {
                     <SwiperSlide className="min-h-[150px] flex-none">
                         <motion.div
                             initial={false}
-                            animate={{  }}
+                            animate={{}}
                             src={arr}
                             className="h-[17rem] md:h-[25rem] rounded-lg mx-4   bg-orange-300 w-full" alt="banner" >{index}</motion.div>
                     </SwiperSlide>
