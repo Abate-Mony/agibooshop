@@ -3,17 +3,6 @@ import { AiOutlineClose } from "react-icons/ai"
 // import { useEffect, useRef } from "react"
 const Popup = ({ message, toggle, closeModal, confirmFunc, children,confirm }) => {
 
-    // const ref = useRef(null)
-    // useEffect(() => {
-
-    //     ref.current = setTimeout(() => {
-    //         clearTimeout(ref.current);
-            
-    //     }, 2000);
-    //     return () => {
-    //     }
-    // }, [error])
-
 
     return (
         <motion.div

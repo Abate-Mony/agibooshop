@@ -7,11 +7,80 @@ import { Review } from '../components'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useEffect, useState, useRef } from "react"
 import { motion } from 'framer-motion'
+import Input from '../components/Input'
+import Form from '../components/Form'
+import Button from '../components/Button'
+
 
 const User = () => {
     const [activeSlide, setActiveSlide] = useState(0);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
-
+    const isLogging = false
+    if (!isLogging) {
+        return (
+            <div
+                className="min-h-screen flex items-center justify-center"
+            >
+                <Swiper
+                     modules={[Navigation, Pagination, Autoplay, A11y]}
+                     scrollbar={true}
+                     pagination={true}
+                    //  navigation={true}
+                >
+                    <SwiperSlide>
+                        <Form
+                            className="max-w-sm !mx-auto flex-1"
+                        >
+                            <h1 className="mb-10 text-2xl text-center">Register </h1>
+                            <Input
+                                name="Full name"
+                                type="text"
+                                required={false}
+                                className="bg-red-400 !border-none "
+                            />
+                            <Input
+                                name="email address or phone"
+                                type="text"
+                                required={false}
+                                className="bg-red-400 !border-none "
+                            />
+                            <Input
+                                name="password"
+                                type="password"
+                                className="bg-red-400 !border-none "
+                            />
+                            <Button
+                                title="Register"
+                                className="!mx-auto !block w-[min(400px,calc(100%-29px))] !rounded-full !pb-4 !pt-3 min-h-[40px]"
+                            />
+                        </Form>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <Form
+                            className="max-w-sm !mx-auto flex-1"
+                        >
+                            <h1 className="mb-10 text-2xl text-center">Login </h1>
+                            <Input
+                                name="email address or phone"
+                                type="text"
+                                required={false}
+                                className="bg-red-400 !border-none "
+                            />
+                            <Input
+                                name="password"
+                                type="password"
+                                className="bg-red-400 !border-none "
+                            />
+                            <Button
+                                title="login"
+                                className="!mx-auto !block w-[min(400px,calc(100%-29px))] !rounded-full !pb-4 !pt-3 min-h-[40px]"
+                            />
+                        </Form>
+                    </SwiperSlide>
+                </Swiper>
+            </div>
+        )
+    }
     return (
         <div>
             <TopBar name="user " />
@@ -21,11 +90,11 @@ const User = () => {
                     <h1 className="text-xl font-medium font-montserrat pl-3 mb-4"> User Manfred </h1>
                 </div>
                 <div>
-                <button
-                                        type="button"
-                                        a data-te-ripple-init
-                                        data-te-ripple-color="light"
-                                        className="inline-block rounded-none  bg-red-400 px-4 pb-2 pt-2 w-fit my-4 mt-0 text-xs font-medium uppercase
+                    <button
+                        type="button"
+                        a data-te-ripple-init
+                        data-te-ripple-color="light"
+                        className="inline-block rounded-none  bg-red-400 px-4 pb-2 pt-2 w-fit my-4 mt-0 text-xs font-medium uppercase
 leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150
 ease-in-out hover:bg-primary-600 mx-auto
 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]
@@ -33,16 +102,16 @@ focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18p
 focus:outline-none focus:ring-0 active:bg-primary-700
 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] 
 dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                                        onClick={() => {
-                                            if (window.confirm("do you want to logout out")) {
-                                                // setIslogin(false)
-                                                localStorage.token = ""
-                                                // navigate("/login")
-                                            }
-                                        }}
-                                    >
-                                        LogOut
-                                    </button>
+                        onClick={() => {
+                            if (window.confirm("do you want to logout out")) {
+                                // setIslogin(false)
+                                localStorage.token = ""
+                                // navigate("/login")
+                            }
+                        }}
+                    >
+                        LogOut
+                    </button>
 
 
                 </div>
