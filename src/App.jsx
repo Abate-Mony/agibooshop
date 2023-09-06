@@ -1,18 +1,23 @@
 import { Categories, Home, OurStore, Product, Cart, AboutUs, ContactUs, MessageBox, } from './pages';
 import { Footer, NavBar, NavFooter, SideBar, AuthLogin } from './components';
-import { Routes, Route, createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { Routes, Route, createBrowserRouter, RouterProvider, Link } from 'react-router-dom'
 import User from "./pages/User"
-import Login from "./pages/Login"
+import Login, { loader as loginLoader, action as loginAction } from "./pages/Login"
 import Register from "./pages/Register"
 import NotificationPopUp from './components/NotificationPopUp';
 import WithRouter from "./withRouter"
 // import { motion } from 'framer-motion'
+import requireAurthed from "./utils/requireAuth"
 import "swiper/css"
 import "swiper/css/navigation"
 import "swiper/css/pagination"
 import "swiper/css/autoplay"
 import "swiper/css/a11y"
 import RootElement from './components/RootElement';
+import { loader as productLoader } from './pages/Product';
+import Error from './components/error';
+import DashLoging from './pages/DashLoging';
+import ProductCategory from './pages/ProductCategory';
 // import ImageView from './components/ImageView';
 const router = createBrowserRouter([
   {
@@ -45,11 +50,20 @@ const router = createBrowserRouter([
       },
       {
         path: "product/:id",
-        element: <Product />
+        element: <Product />,
+        loader: productLoader,
+        errorElement: <div>some error has occurs </div>
+      },
+      {
+        path: "category/:id",
+        // element: <Product />,
+        // loader: productLoader,
+        element: <ProductCategory />
       },
       {
         path: "user",
-        element: <User />
+        element: <User />,
+        loader: async () => await requireAurthed()
       },
       {
         path: "auth",
@@ -58,15 +72,40 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <Login />,
+            loader: loginLoader
+            , action: loginAction
           },
-          {
-            path: "register",
-            element: <Register />,
-          },
+
         ]
       },
     ]
   },
+
+  {
+    path: "/dashboard",
+    errorElement: <Error />,
+    loader: async () => await requireAurthed()
+    ,
+    children: [
+      {
+        index: true,
+        element: <div>main dashboard <Link to={"users"} className='text-blue-500'> users</Link></div>,
+        errorElement: <Error />,
+        loader: async () => await requireAurthed()
+      },
+      {
+        path: "users",
+        element: <div>user dashboard here</div>,
+        errorElement: <Error />,
+        loader: async () => await requireAurthed()
+      }, {
+        path: "login",
+        element: <DashLoging />,
+
+      }
+    ]
+  }
+
 
 ])
 function App() {

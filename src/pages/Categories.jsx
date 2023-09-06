@@ -3,6 +3,7 @@ import { NavBar, TopBar } from '../components'
 import { useState, useMemo } from 'react'
 import ImageMagnifier from '../components/ImageView'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 const categories = [
   "clothing", "shores", "hairs", "colors hairs", "brazilian hair"
 ]
@@ -47,26 +48,26 @@ const Categories = () => {
           <div className="flex-1 max-h-screen overflow-hidden overflow-y-auto 
 pb-52
 ">
-            <h1>women clothes {Math.random().toString().substring(2,8)}</h1>
-            <div className="grid  md:place-items-end    gap-x-2 gap-y-4 grid-cols-[repeat(auto-fit,minmax(min(5rem,calc(100%-30px)),_1fr))]
+            <h1>women clothes {Math.random().toString().substring(2, 8)}</h1>
+            <div className="grid  md:place-items-end    md:gap-x-2 gap-y-4 grid-cols-[repeat(auto-fit,minmax(min(5rem,calc(100%-30px)),_1fr))]
             md:grid-cols-[repeat(auto-fit,minmax(min(7rem,calc(100%-30px)),_1fr))]
             lg:grid-cols-[repeat(auto-fit,minmax(min(9rem,calc(100%-30px)),_1fr))]
             ">
               {
                 Array.from({ length: 13 }, (arr, index) => {
                   return (
-                    <motion.div
+                    <Link to={"/category/" + index}
                       key={Math.random().toString()}
                       initial={{ opacity: 0.3, x: 200 }}
                       animate={{ opacity: 1, x: 0 }}
-                      
+
                       className='ml-0.5 min-h-[8rem]'
                     >
                       <img
                         className='h-[10rem]'
                         src="https://www.clawigs.com/image/cache/catalog/banner/human-2023-1140x380.jpg" alt="" />
                       <h1>Bonnets</h1>
-                    </motion.div>
+                    </Link>
 
 
                   )
@@ -74,33 +75,7 @@ pb-52
               }
 
             </div>
-            <h1>mens clothes</h1>
-            <div className="grid  md:place-items-end    gap-x-2 gap-y-4 grid-cols-[repeat(auto-fit,minmax(min(5rem,calc(100%-30px)),_1fr))]
-            md:grid-cols-[repeat(auto-fit,minmax(min(7rem,calc(100%-30px)),_1fr))]
-            lg:grid-cols-[repeat(auto-fit,minmax(min(9rem,calc(100%-30px)),_1fr))]
-            ">
-              {
-                Array.from({ length: 13 }, (arr, index) => {
-                  return (
-                    <motion.div
-                      key={Math.random().toString()}
-                      initial={{ opacity: 0.3, x: 200 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      
-                      className='ml-0.5 min-h-[8rem]'
-                    >
-                      <img
-                        className='h-[10rem] object-fill'
-                        src="https://www.clawigs.com/image/cache/catalog/banner/human-2023-1140x380.jpg" alt="" />
-                      <h1>Bonnets</h1>
-                    </motion.div>
 
-
-                  )
-                })
-              }
-
-            </div>
           </div>
         </div>
 

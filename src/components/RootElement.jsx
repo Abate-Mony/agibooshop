@@ -1,17 +1,20 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigation } from 'react-router-dom'
 import SideBar from './SideNav'
 import NavFooter from './NavFooter'
-
+import WithRouter from '../withRouter'
 const RootElement = () => {
-  return (
-    <div>
-     <SideBar/>
-      <NavFooter />
-      <Outlet/>
-    
-    </div>
-  )
+    const navigation = useNavigation()
+    return (
+        <div>
+            <SideBar />
+            <WithRouter />
+            <NavFooter />
+            {
+                navigation.state == "loading" ? "please wait loading page": <Outlet />
+            }
+        </div>
+    )
 }
 
 export default RootElement

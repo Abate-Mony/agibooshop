@@ -15,37 +15,56 @@ const NavFooter = () => {
     useEffect(() => {
         dispatch(calculateTotal())
     }, [totalAmount, cartItem])
-    const NavLinkContainer = ({ children, to }) => {
+    const NavLinkContainer = ({ to, icon: Icon, text }) => {
         return (
             <NavLink
                 to={to}
-                className={({ isActive }) => isActive ? "justify-center font-montserrat font-medium tracking-tight w-1/5  items-center flex flex-col group  active" : "justify-center font-montserrat font-medium tracking-tight w-1/5  items-center flex flex-col group"}
-
+                className={"justify-center font-montserrat font-medium tracking-tight w-1/5  items-center flex flex-col group "}
             >
-                <div
-                    className="grid place-items-center transition-all duration-500  rounded-full group-[.active]:!bg-black/5 px-4 p-4"
-                >
-                    {children}
-                </div>
+                {({ isActive, isPending }) => (
+                    <div
+                        className="grid place-items-center transition-all duration-500  rounded-full "
+                    >
+                        <Icon
+                            size={25}
+                            color={(isPending ? "blue" : isActive ? "gold" : "gray")}
+
+                        />
+                        <p className={` text-xs font-montserrat font-medium text-slate-900 tracking-tight leading-normal select-none`}>{text}</p>
+                    </div>
+                )}
+
             </NavLink>
         )
     }
     return (
         <div
-            className="fixed  bottom-0 sm:py-4 z-10 w-full sm:w-fit sm:translate-y-1/2 sm:rounded-md sm:left-6 sm:bottom-1/2 min-h-[3rem] pb-4 bg-white shadow left-0"
+            className="fixed pt-4 bottom-0 sm:py-4 z-10 w-full sm:w-fit sm:translate-y-1/2 sm:rounded-md sm:left-6 sm:bottom-1/2 min-h-[3rem] pb-4 bg-white shadow left-0"
         >
             <div className="flex sm:justify-center sm:items-center sm:flex-col grid-flow-col gap-4 px-4">
 
-                <NavLinkContainer to={"/"}>
-                    <MdHome size={25} />
-                    <p className={` text-xs font-montserrat font-medium text-slate-900 tracking-tight leading-normal select-none`}>Home</p>
-                </NavLinkContainer>
-                <NavLinkContainer to={"/categories"}>
-                <BiCategoryAlt size={25} />
-                        <p className="text-xs font-montserrat font-medium text-slate-900 tracking-tight leading-normal select-none ">category</p>
-                   </NavLinkContainer>
-          
-                <span className="justify-center font-montserrat font-medium tracking-tight bg-black relative shadow sm:shadow-2xl  flex-none h-[60px] rounded-full mt-[-25px] sm:mr-[-60px] sm:w-[60px]  sm:mt-0 text-white hover:bg-opacity-80 transition-all duration-300  w-[60px]  items-center flex flex-col " onClick={() => navigate("/cart")} >
+                <NavLinkContainer to={"/"}
+                    text={"Home"}
+                    icon={MdHome}
+
+                />
+                <NavLinkContainer to={"/categories"}
+                    text={"Category"}
+                    icon={BiCategoryAlt}
+
+                />
+
+
+                <NavLink
+                    className="justify-center 
+                font-montserrat font-medium
+                tracking-tight bg-black
+                relative shadow sm:shadow-2xl 
+                flex-none h-[60px] rounded-full
+                mt-[-25px] sm:mr-[-60px] sm:w-[60px]
+                sm:mt-0 text-white hover:bg-opacity-80
+                transition-all duration-300  w-[60px]  
+                items-center flex flex-col " to={"/cart"} >
                     <AiOutlineShoppingCart size={25} />
                     <p className="text-xs font-montserrat font-medium text-slate-900 tracking-tight leading-normal select-none">Cart</p>
                     <motion.div
@@ -54,12 +73,15 @@ const NavFooter = () => {
                         transition={{ duration: 2 }}
 
                         className="absolute -top-0 text-white -right-0 w-4 h-4 flex justify-center items-center rounded-full text-xs bg-red-400">{totalAmount}</motion.div>
-                </span>
-                <NavLinkContainer to={"/user"}>
-                <AiOutlineUser size={25} />
-                        <p className="text-xs font-montserrat font-medium text-slate-900 tracking-tight leading-normal select-none">user</p>
-                      </NavLinkContainer>
-       
+                </NavLink>
+                <NavLinkContainer to={"/user"}
+                    text={"user"}
+                    icon={AiOutlineUser}
+
+                />
+
+
+
                 <NavLink className="justify-center font-montserrat font-medium tracking-tight w-1/5  items-center flex flex-col " onClick={toggleMessage}>
                     <AiOutlineMessage size={25} />
                     <p className="text-xs font-montserrat font-medium text-slate-900 tracking-tight leading-normal select-none">message</p>

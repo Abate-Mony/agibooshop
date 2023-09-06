@@ -1,6 +1,6 @@
 import { AiOutlineShoppingCart } from "react-icons/ai"
 import { ProductCard, Review, TopBar } from '../components'
-import { useNavigate, useParams, useLocation } from "react-router-dom"
+import { useNavigate, useParams, useLocation, useLoaderData } from "react-router-dom"
 import { AnimatePresence, motion } from 'framer-motion'
 // import "./styles.css";
 import { FreeMode, Navigation, Pagination, Scrollbar, A11y, Autoplay, Thumbs } from "swiper";
@@ -41,19 +41,20 @@ const varaints = {
         y: 0
     }
 }
+export const loader = ({ params }) => {
+    const id = params?.id
+    const productData = data.find(({ id: cartId }) => cartId == id)
+    return productData
+}
 const Product = () => {
+    // const location = useLocation()
 
-    const location = useLocation()
-    console.log(location)
-    useEffect(() => {
-        window.history.replaceState({}, null, `/`)
-    }, [])
     const { id } = useParams()
     const { incart: isInCart } = useItemINCart(id)
-    const productData = useCallback(data.find(({ id: cartId }) => cartId == id),
-        [id])
+    const productData = useLoaderData()
+    // const productData = useCallback(data.find(({ id: cartId }) => cartId == id),
+    //     [id])
     const [number, setNumber] = useState(1)
-    // const [product, setProduct] = useState(productData)
     const product = {
         ...productData
     }
@@ -99,7 +100,7 @@ const Product = () => {
                 <div className="flex-1 border-4 max-w-3xl relative mb-12">
 
                     <Swiper className="flex-1-- relative--"
-
+                        loop
                         slidesPerView={1}
                         onSlideChange={(e) => setActiveSlide(e.activeIndex)}
                         modules={

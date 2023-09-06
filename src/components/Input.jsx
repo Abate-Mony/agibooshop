@@ -6,11 +6,8 @@ const Input = forwardRef(({
     required = true,
     ...props
 }, ref) => {
-    // { inputRef, value, onChange, name,type }
     const [inputid, setInputId] = useState(null)
-    // useEffect(() => {
-    //     setInputId(generateRandonNumber())
-    // }, [])
+
     return (
         <div className="relative mb-6" data-te-input-wrapper-init>
             <input
@@ -19,9 +16,7 @@ const Input = forwardRef(({
                 {
                 ...props
                 }
-                // ref={inputRef}
-                //     onChange={onChange}
-                //     type={type ??"text"}
+              
                 className="peer block min-h-[auto] w-full 
 rounded 
 border-2

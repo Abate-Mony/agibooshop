@@ -10,77 +10,18 @@ import { motion } from 'framer-motion'
 import Input from '../components/Input'
 import Form from '../components/Form'
 import Button from '../components/Button'
+import { BsChevronLeft } from "react-icons/bs";
 
+export const loader = () => {
+    setTimeout(() => {
 
+    }, 100);
+
+}
 const User = () => {
     const [activeSlide, setActiveSlide] = useState(0);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    const isLogging = false
-    if (!isLogging) {
-        return (
-            <div
-                className="min-h-screen flex items-center justify-center"
-            >
-                <Swiper
-                     modules={[Navigation, Pagination, Autoplay, A11y]}
-                     scrollbar={true}
-                     pagination={true}
-                    //  navigation={true}
-                >
-                    <SwiperSlide>
-                        <Form
-                            className="max-w-sm !mx-auto flex-1"
-                        >
-                            <h1 className="mb-10 text-2xl text-center">Register </h1>
-                            <Input
-                                name="Full name"
-                                type="text"
-                                required={false}
-                                className="bg-red-400 !border-none "
-                            />
-                            <Input
-                                name="email address or phone"
-                                type="text"
-                                required={false}
-                                className="bg-red-400 !border-none "
-                            />
-                            <Input
-                                name="password"
-                                type="password"
-                                className="bg-red-400 !border-none "
-                            />
-                            <Button
-                                title="Register"
-                                className="!mx-auto !block w-[min(400px,calc(100%-29px))] !rounded-full !pb-4 !pt-3 min-h-[40px]"
-                            />
-                        </Form>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <Form
-                            className="max-w-sm !mx-auto flex-1"
-                        >
-                            <h1 className="mb-10 text-2xl text-center">Login </h1>
-                            <Input
-                                name="email address or phone"
-                                type="text"
-                                required={false}
-                                className="bg-red-400 !border-none "
-                            />
-                            <Input
-                                name="password"
-                                type="password"
-                                className="bg-red-400 !border-none "
-                            />
-                            <Button
-                                title="login"
-                                className="!mx-auto !block w-[min(400px,calc(100%-29px))] !rounded-full !pb-4 !pt-3 min-h-[40px]"
-                            />
-                        </Form>
-                    </SwiperSlide>
-                </Swiper>
-            </div>
-        )
-    }
+
     return (
         <div>
             <TopBar name="user " />
