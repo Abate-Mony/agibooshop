@@ -1,5 +1,5 @@
 import { SwiperSlide, Swiper } from 'swiper/react'
-import { Navigation, Pagination, A11y, Autoplay, Thumbs } from "swiper";
+import { Navigation, Pagination, A11y, Autoplay, Thumbs } from "swiper/modules";
 import Input from '../components/Input';
 // import Form from '../components/Form';
 import Button from '../components/Button';

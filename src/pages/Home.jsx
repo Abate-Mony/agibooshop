@@ -1,5 +1,5 @@
 import { Brand, Footer, NavBar, NavMenu, ProductCard } from "../components"
-import { Navigation, Pagination, Autoplay, A11y } from "swiper"
+import { Navigation, Pagination, Autoplay, A11y } from "swiper/modules"
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import { useEffect, useState, useRef } from "react"
@@ -14,14 +14,7 @@ import Scrollable from "../components/Scrollable"
 import Button from "../components/Button"
 import { Link } from "react-router-dom"
 const Home = () => {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      // setToggle(true)
-    }, 2000);
 
-    return () => {
-    }
-  }, [])
 
   const [activeSlide, setActiveSlide] = useState(0);
   // const [error, setError] = useState(false);
@@ -39,7 +32,7 @@ const Home = () => {
     }
 
   }
- 
+
   return (
     <>
       <NavBar isInView={isInView} />
@@ -84,7 +77,7 @@ const Home = () => {
 
         New Arrivals
       </Heading>
-      <div className="flex flex-nowwrap overflow-x-auto overflow-y-hidden">
+      <div className="--grid flex flex-nowrap gap-x-2 bg-white --grid-cols-[repeat(auto-fit,minmax(min(200px,100%),1fr))] overflow-x-auto overflow-y-hidden">
         {data.map((arr, index) => <ProductCard
           className="rounded-md !max-w-[200px] md:!max-w-[230px]"
           key={index}
@@ -100,15 +93,15 @@ const Home = () => {
       <Heading>
         Products
       </Heading>
-      <Scrollable className={"!flex-wrap !justify-center !max-w-fit border mx-auto !container"}>
+      <div className={"bg-white grid  grid-cols-[repeat(auto-fit,minmax(min(12rem,calc(100%-30px)),_1fr))]  lg:grid-cols-[repeat(auto-fit,minmax(min(17rem,calc(100%-30px)),_1fr))] !w-full   !container mx-auto lg:px-6 gap-x-1 lg:gap-x-0"}>
         {data.map((arr, index) => <ProductCard
-          className="rounded-md !max-w-[200px] md:!max-w-[230px]"
+          className="rounded-md !w-full"
           key={index}
           {
           ...arr
           }
         />)}
-      </Scrollable>
+      </div>
 
       <Footer />
 

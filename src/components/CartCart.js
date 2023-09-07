@@ -22,18 +22,18 @@ export default function CartCart({ id, productname, grid }) {
     }, [isInView])
     const [isOverlay, setIsOverlay] = useState(false)
     const onLongPress = () => {
-        console.log('longpress is triggered');
+        // console.log('longpress is triggered');
         setIsOverlay(true)
     };
 
     const onClick = () => {
-        console.log('click is triggered')
+        // console.log('click is triggered')
         navigate("/product/5")
     }
 
     const defaultOptions = {
         shouldPreventDefault: true,
-        delay: 500,
+        delay: 1000,
     };
     const longPressEvent = useLongPress(onLongPress, onClick, defaultOptions);
 
@@ -48,7 +48,7 @@ export default function CartCart({ id, productname, grid }) {
             className='shadow-sm min-h-[100px] rounded-md mb-0 py-2 relative'
         >
             <div
-                onClick={(e) => {
+                onClick={e => {
                     e.stopPropagation()
                     setIsOverlay(false)
                 }}
@@ -75,7 +75,7 @@ export default function CartCart({ id, productname, grid }) {
                     {
                         grid && <p className='translate-y-4 group-[.active-scale]:translate-y-0 transition-[transform] duration-300'>some user are set to be greate while other work for money</p>
                     }
-                    <h5>2,466 CFA {productname}</h5>
+                    <h5>2,466 CFA</h5>
                     <div className='flex justify-between items-center pb-1'>
                         <div className='flex gap-x-2 items-center'>
                             <ReactStars
@@ -86,7 +86,6 @@ export default function CartCart({ id, productname, grid }) {
                                 activeColor="#ffd700"
                                 edit={false}
                             />
-                            {/* rating count here */}
                             <p>
                                 4.3
                             </p>

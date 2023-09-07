@@ -3,7 +3,8 @@ import { useEffect, useState, useRef } from 'react'
 import { MdOutlineMenu } from 'react-icons/md'
 import { BsMoon } from 'react-icons/bs'
 import { actions } from '../actions/openSidebar'
-const NavBar = ({isInView}) => {
+const NavBar = ({ isInView }) => {
+  const { isOpen } = useSelector(state => state.sideBar)
   const [index, setIndex] = useState(0);
   const listItems = [
     "hairs",
@@ -11,23 +12,48 @@ const NavBar = ({isInView}) => {
     "trouser"
   ]
   const ref = useRef(null)
+  // useEffect(() => {
+  //   window.addEventListener("popstate", () => {
+  //     if (isOpen) {
+  //       console.log("a state was pop")
+  //       dispatch(actions.close())
+  //     }
+  //   })
+  //   return () => {
+  //     window.removeEventListener("popstate", () => {
+  //       if (isOpen) {
+  //         console.log("a state was pop")
+  //         dispatch(actions.close())
+  //       }
+  //     })
+  //   }
+  // }, [])
+  window.addEventListener("popstate", () => {
+    if (isOpen) {
+      // console.log("a state was pop")
+      dispatch(actions.close())
+    }
+  })
   useEffect(() => {
-     ref.current = setInterval(() => {
-      var counter=index
-      if (counter++ >= listItems.length-1) {
+    ref.current = setInterval(() => {
+      var counter = index
+      if (counter++ >= listItems.length - 1) {
         setIndex(0)
         return
       }
       setIndex(counter)
 
     }, 3000)
-    return ()=> clearInterval(ref.current)
+    return () => clearInterval(ref.current)
 
   }, [index])
   const dispatch = useDispatch()
-  const toggleSideBar = () => dispatch(actions.toggle())
+  const toggleSideBar = () => {
+    dispatch(actions.toggle())
+    window.history.pushState({}, null, `${window.location.href}?#opensidebar`)
+  }
   return (
-    <div className={`fixed left-0 w-full  z-10   ${isInView?"bg-transparent":"bg-white"} h-[5rem] transition-colors bg-opacity-95 duration-500 top-0 pt-4 `}>
+    <div className={`fixed left-0 w-full  z-10   ${isInView ? "bg-transparent" : "bg-white"} h-[5rem] transition-colors bg-opacity-95 duration-500 top-0 pt-4 `}>
       <div className="container text-4xl mx-auto h-full">
         <form className={` bg-transparent w-[25rem] items-center flex max-w-[calc(100vw-2.5rem)] lg:w-full lg:max-w-3xl mx-auto`}>
           <div class="relative bg-transparent shadow bg-white flex-1 rounded-2xl">
@@ -39,10 +65,12 @@ const NavBar = ({isInView}) => {
             <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
           </div>
           <div className="w-12 ml-2 h-12 rounded-full relative flex-none flex items-center justify-center bg-white shadow-xl"
-            // onClick={toggleSideBar}
+          // onClick={toggleSideBar}
           >
-            <MdOutlineMenu size={30}  onClick={toggleSideBar} />
-            <span className={`w-10 h-10 grid place-items-center bg-white rounded-full shadow cursor-pointer transition-all duration-700 absolute top-14 ${isInView?"visible opacity-100 ":"invisible opacity-0 pointer-event-none"}`}> <BsMoon size={30} /></span>
+            <MdOutlineMenu size={30} onClick={toggleSideBar}
+
+            />
+            <span className={`w-10 h-10 grid place-items-center bg-white rounded-full shadow cursor-pointer transition-all duration-700 absolute top-14 ${isInView ? "visible opacity-100 " : "invisible opacity-0 pointer-event-none"}`}> <BsMoon size={30} /></span>
           </div>
         </form>
 

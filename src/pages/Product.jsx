@@ -3,7 +3,7 @@ import { ProductCard, Review, TopBar } from '../components'
 import { useNavigate, useParams, useLocation, useLoaderData } from "react-router-dom"
 import { AnimatePresence, motion } from 'framer-motion'
 // import "./styles.css";
-import { FreeMode, Navigation, Pagination, Scrollbar, A11y, Autoplay, Thumbs } from "swiper";
+import { FreeMode, Navigation, Pagination, Scrollbar, A11y, Autoplay, Thumbs } from "swiper/modules";
 
 // import { FreeMode, Navigation, Pagination, Scrollbar, A11y, Autoplay, Thumbs } from "swiper";
 import { Swiper, SwiperSlide } from 'swiper/react'

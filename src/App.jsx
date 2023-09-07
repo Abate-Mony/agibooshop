@@ -4,7 +4,6 @@ import { Routes, Route, createBrowserRouter, RouterProvider, Link } from 'react-
 import User from "./pages/User"
 import Login, { loader as loginLoader, action as loginAction } from "./pages/Login"
 import Register from "./pages/Register"
-import NotificationPopUp from './components/NotificationPopUp';
 import WithRouter from "./withRouter"
 // import { motion } from 'framer-motion'
 import requireAurthed from "./utils/requireAuth"

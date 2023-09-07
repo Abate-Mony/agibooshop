@@ -1,7 +1,6 @@
 import { TopBar } from "../components"
 import { Brand, Footer, NavBar, NavMenu, ProductCard } from "../components"
-// import { Navigation, Pagination, Autoplay, A11y } from "swiper"
-import { FreeMode, Navigation, Pagination, Scrollbar, A11y, Autoplay, Thumbs } from "swiper";
+import { FreeMode, Navigation, Pagination, Scrollbar, A11y, Autoplay, Thumbs } from "swiper/modules";
 import { Review } from '../components'
 // import {Footer}
 import { Swiper, SwiperSlide } from 'swiper/react'
