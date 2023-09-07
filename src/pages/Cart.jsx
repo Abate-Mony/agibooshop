@@ -78,9 +78,10 @@ const Cart = () => {
                     iscartempty ?
                         cartItem.map((item, i) => (<CartItem
                             key={Math.random()}
-                            animate={searchParams.get("product_id") && searchParams.get("product_id") == item.id ? true : false}
+                            // animate={searchParams.get("product_id") && searchParams.get("product_id") == item.id ? true : false}
                             {...item}
                         />)) : <EmptyCart />}
+                        
 
             </div>
 

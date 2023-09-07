@@ -111,7 +111,7 @@ const CartItem = ({ productname,
             // initial="hidden"
             // whileInView="show"
             // exit={{ opacity: 0 }}
-            // key={`${id} somecode`}
+            key={`${id} somecode`}
             // animate={{ x: animate ? [0, 100, 0, 100, 0] : 0 }
             // }
 

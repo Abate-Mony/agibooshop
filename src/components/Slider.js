@@ -5,7 +5,7 @@ const Slider = ({ children, active, setActive, className }) => {
         <div
             onClick={e => setActive(false)}
             className={`${className} ${!active ? "invisible pointer-events-none  opacity-0" : "visible pointer-events-auto opacity-100 active"}
-        fixed inset-0 w-full h-full bg-black/50 z-[500] group transtion-[visibility] duration-200 
+        fixed inset-0 w-full h-full bg-black/50 z-[500] group transtion-[visibility] duration-300 
             `}
         >
             <div
