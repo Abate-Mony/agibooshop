@@ -116,7 +116,7 @@ const CartItem = ({ productname,
             // }
 
             // transition={{ duration: 2 }}
-            className={` ${isMouseDown ? "bg-orange-100" : null} px-4 select-none  rounded-lg py-1.5 w-full md:w-1/2 lg:w-1/3 `}>
+            className={` ${isMouseDown ? "bg-orange-100" : null} px-4 select-none  rounded-lg py-1.5 w-full `}>
             <div className="flex rounded-2xl shadow-lg bg-white gap-4 py-1 
         transition-all duration-75
         "

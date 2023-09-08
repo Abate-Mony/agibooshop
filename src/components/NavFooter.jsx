@@ -7,7 +7,10 @@ import { toggleMessage as toggle } from "../actions/openMessageBox";
 import { useEffect } from "react"
 import { calculateTotal } from "../actions/cartItems"
 import { motion } from "framer-motion"
+import useOpenClose from "../store/useOpenClose"
 const NavFooter = () => {
+    const { open } = useOpenClose()
+
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const toggleMessage = () => dispatch(toggle());
@@ -19,7 +22,7 @@ const NavFooter = () => {
         return (
             <NavLink
                 to={to}
-                className={"justify-center font-montserrat font-medium tracking-tight w-1/5  items-center flex flex-col group "}
+                className={"justify-center  font-montserrat font-medium tracking-tight w-1/5  items-center flex flex-col group "}
             >
                 {({ isActive, isPending }) => (
                     <div
@@ -39,7 +42,7 @@ const NavFooter = () => {
     }
     return (
         <div
-            className="fixed pt-4 bottom-0 sm:py-4 z-10 w-full sm:w-fit sm:translate-y-1/2 sm:rounded-md sm:left-6 sm:bottom-1/2 min-h-[3rem] pb-4 bg-white shadow left-0"
+            className="fixed pt-4 lg:hidden bottom-0 sm:py-4 z-10 w-full sm:w-fit sm:translate-y-1/2 sm:rounded-md sm:left-6 sm:bottom-1/2 min-h-[3rem] pb-4 bg-white shadow left-0"
         >
             <div className="flex sm:justify-center sm:items-center sm:flex-col grid-flow-col gap-4 px-4">
 
@@ -55,7 +58,7 @@ const NavFooter = () => {
                 />
 
 
-                <NavLink
+                <div onClick={() => open()}
                     className="justify-center 
                 font-montserrat font-medium
                 tracking-tight bg-black
@@ -73,7 +76,7 @@ const NavFooter = () => {
                         transition={{ duration: 2 }}
 
                         className="absolute -top-0 text-white -right-0 w-4 h-4 flex justify-center items-center rounded-full text-xs bg-red-400">{totalAmount}</motion.div>
-                </NavLink>
+                </div>
                 <NavLinkContainer to={"/user"}
                     text={"user"}
                     icon={AiOutlineUser}

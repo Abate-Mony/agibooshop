@@ -4,13 +4,16 @@ import SideBar from './SideNav'
 import NavFooter from './NavFooter'
 import WithRouter from '../withRouter'
 import NotificationPopUp from '../components/NotificationPopUp';
+import Slider from './Slider'
+import useOpenClose from '../store/useOpenClose'
+import Cart from '../pages/Cart'
 
 const RootElement = () => {
     const navigation = useNavigation()
+    const { isOpen, close } = useOpenClose()
     return (
         <div>
-            {/* <NotificationPopUp /> */}
-            <SideBar />
+            <Cart />
             <WithRouter />
             <NavFooter />
             {

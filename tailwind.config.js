@@ -8,6 +8,7 @@ module.exports = {
     "manrope":["Manrope",'sans-serif'],
     "poppins":["Poppins",'sans-serif'],
     "montserrat":["Montserrat",'sans-serif'],
+    "bricolage":["Bricolage Grotesque",'sans-serif'],
     
     }
     },

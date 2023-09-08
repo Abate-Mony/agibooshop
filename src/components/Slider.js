@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Slider = ({ children, active, setActive, className }) => {
+const Slider = ({ children, active, setActive, className,className2 }) => {
     return (
         <div
             onClick={e => setActive(false)}
@@ -11,9 +11,9 @@ const Slider = ({ children, active, setActive, className }) => {
             <div
                 onClick={e => e.stopPropagation()}
 
-                className='absolute shadow   w-[min(300px,calc(100vw-30px))] bg-white h-screen 
+                className={`absolute shadow   w-[min(300px,calc(100vw-30px))] bg-white h-screen 
                 group-[.active]:right-0 transition-[right]  duration-500
-                -right-full z-10'
+                -right-full z-10 ${className2}`}
             >
                 {children}
             </div>

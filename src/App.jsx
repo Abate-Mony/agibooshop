@@ -17,6 +17,7 @@ import { loader as productLoader } from './pages/Product';
 import Error from './components/error';
 import DashLoging from './pages/DashLoging';
 import ProductCategory from './pages/ProductCategory';
+import ShoppingBag from './pages/ShoppingBag';
 // import ImageView from './components/ImageView';
 const router = createBrowserRouter([
   {
@@ -36,8 +37,8 @@ const router = createBrowserRouter([
         element: <Categories />
       },
       {
-        path: "cart",
-        element: <Cart />
+        path: "shopping-bag",
+        element: <ShoppingBag />
       },
       {
         path: "about-us",
