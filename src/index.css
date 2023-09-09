@@ -16,6 +16,10 @@ body {
   */
   @apply font-bricolage bg-slate-100;
 }
+
+section {
+  @apply py-10
+}
 .grid-flow {
   grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
   display: grid;

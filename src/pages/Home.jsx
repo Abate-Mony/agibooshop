@@ -35,7 +35,6 @@ const Home = () => {
 
   return (
     <>
-      <NavBar isInView={isInView} />
 
       <Swiper ref={ref}
         onSlideChange={(e) => setActiveSlide(e.activeIndex)}

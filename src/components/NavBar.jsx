@@ -1,78 +1,157 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState, useRef } from 'react'
-import { MdOutlineMenu } from 'react-icons/md'
-import { BsMoon } from 'react-icons/bs'
-import { actions } from '../actions/openSidebar'
-const NavBar = ({ isInView }) => {
-  const { isOpen } = useSelector(state => state.sideBar)
-  const [index, setIndex] = useState(0);
-  const listItems = [
-    "hairs",
-    "wigs",
-    "trouser"
-  ]
-  const ref = useRef(null)
-  // useEffect(() => {
-  //   window.addEventListener("popstate", () => {
-  //     if (isOpen) {
-  //       console.log("a state was pop")
-  //       dispatch(actions.close())
-  //     }
-  //   })
-  //   return () => {
-  //     window.removeEventListener("popstate", () => {
-  //       if (isOpen) {
-  //         console.log("a state was pop")
-  //         dispatch(actions.close())
-  //       }
-  //     })
-  //   }
-  // }, [])
-  // window.addEventListener("popstate", () => {
-  //   if (isOpen) {
-  //     // console.log("a state was pop")
-  //     dispatch(actions.close())
-  //   }
-  // })
-  useEffect(() => {
-    ref.current = setInterval(() => {
-      var counter = index
-      if (counter++ >= listItems.length - 1) {
-        setIndex(0)
-        return
-      }
-      setIndex(counter)
-    }, 3000)
-    return () => clearInterval(ref.current)
-
-  }, [index])
-  const dispatch = useDispatch()
-  const toggleSideBar = () => {
-    dispatch(actions.toggle())
-    // window.history.pushState({}, null, `${window.location.href}?#opensidebar`)
-  }
+import React, { useState } from 'react'
+import { BsBag } from 'react-icons/bs'
+import Button from './Button'
+import { AiOutlineMenu, AiOutlineUser } from 'react-icons/ai'
+import { BiSearch } from 'react-icons/bi'
+import Brand from './Brand'
+import DropDown from './DropDown'
+import { EffectCreative, Pagination, Autoplay, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Link, useNavigate } from 'react-router-dom'
+const OverLay = ({ children }) => {
   return (
-    <div className={`fixed left-0 w-full  z-10   ${isInView ? "bg-transparent" : "bg-white"} h-[5rem] transition-colors bg-opacity-95 duration-500 top-0 pt-4 `}>
-      <div className="container text-4xl mx-auto h-full">
-        <form className={` bg-transparent w-[25rem] items-center flex max-w-[calc(100vw-2.5rem)] lg:w-full lg:max-w-3xl mx-auto`}>
-          <div className="relative bg-transparent shadow bg-white flex-1 rounded-2xl">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            </div>
-            <input type="search"
-              className="block w-full p-4 pl-10 text-sm rounded-lg hover:outline-none hover:shadow-2xl text-gray-900 border- border-gray-300 rounded-lg- bg-transparent focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700- dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={`Search ${listItems[index]}...`} required />
-            <button type="submit" className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
-          </div>
-          <div className="w-12 ml-2 h-12 rounded-full relative flex-none flex items-center justify-center bg-white shadow-xl"
-          >
-            <MdOutlineMenu size={30} onClick={toggleSideBar}
-            />
-            <span className={`w-10 h-10 grid place-items-center bg-white rounded-full shadow cursor-pointer transition-all duration-700 absolute top-14 ${isInView ? "visible opacity-100 " : "invisible opacity-0 pointer-event-none"}`}> <BsMoon size={30} /></span>
-          </div>
-        </form>
-
-      </div>
+    <div className='transition-all duration-300 top-full absolute bg-black/50 inset-0 invisible  opacity-0 group-hover:opacity-100 group-hover:visible left-0 h-fit max-h-screen pb-10 w-full z-[5]'>
+      {children}
     </div>
+  )
+}
+const NavBar = () => {
+  const [toggle, setToggle] = useState(false)
+  const navigate = useNavigate()
+  return (
+    <>
+      <div
+        className='py-2 text-white text-center container mx-auto bg-black/95'
+      >
+        <Swiper
+          modules={[Autoplay, Navigation]}
+          navigation={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false
+          }}
+        >
+          <SwiperSlide>
+            <p
+              className='text-xs md:sm lg:lg'
+            >FREE SHIPPING OVER $75 USD & EASY RETURNS</p>
+          </SwiperSlide>
+          <SwiperSlide>
+            <p
+              className='text-xs md:sm lg:lg'
+            >TODAY'S CLEANEST DIVE WATCH | SHOP CALI DIVER SHOP NOW <Button
+                title="shop now"
+                className="!inline-block !px-2 "
+              /></p>
+          </SwiperSlide>
+        </Swiper>
+      </div>
+      {/* top nav bar here */}
+      <div
+        className='border-b sticky top-0 left-0 right-0 bg-white z-[10]'
+      >
+        <div
+          className='lg:px-14 mx-auto py-2 px-2  flex justify-between items-center relative'
+        >
+          <DropDown
+            setToggle={setToggle}
+            toggle={toggle} />
+
+          <AiOutlineMenu
+            size={20}
+            className='block lg:hidden'
+          />
+          <ul
+            className='lg:flex items-center gap-x-3 hidden'
+          >
+            <li className='group px-5 hover:border-black border-b-2 border-transparent'>
+              <a className='text-lg uppercase font-extralight group-hover:font-medium  transition-all duration-200' href='#'>Men</a>
+              <OverLay>
+                Men closes here
+              </OverLay>
+            </li>
+            <li className='group hover:border-black border-b-2 border-transparent px-5'>
+              <a className='text-lg uppercase font-extralight group-hover:font-medium  transition-all duration-200' href='#'>Women</a>
+              <OverLay>
+                women clothe shere
+              </OverLay>
+            </li>
+            <li className='group hover:border-black border-b-2 border-transparent px-5'>
+              <a className='text-lg uppercase font-extralight group-hover:font-medium  transition-all duration-200' href='#'>Brand</a>
+              <OverLay>
+                this the brand here
+              </OverLay>
+            </li>
+          </ul>
+          <Link to="/home">
+            <Brand />
+          </Link>
+          <div
+            className='flex gap-x-3.5 items-stretch  '
+          >
+            <span className='grid place-items-center'>
+              <BiSearch
+                onClick={() => setToggle(true)}
+                className='text-slate-800 font-extralight cursor-pointer '
+                size={20}
+              />
+            </span>
+            <span
+              className='relative   hidden cursor-pointer lg:grid place-items-center  group '
+            >
+              <AiOutlineUser
+                className='text-slate-800 font-extralight '
+                size={20}
+              />
+              <div
+                className='absolute top-[calc(100%+6px)] flex flex-col space-y-5 -translate-x-1/2 translate-y-5 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 left-1/2 invisible group-hover:visible
+                             min-h-[70px] bg-black/95 px-5 py-4 min-w-fit
+                             
+                             
+                             '
+              >
+                <div
+                  className='flex flex-col gap-y-4 w-full'
+                >
+                  <Button
+                    title="log in "
+                    className="!block break-keep flex-1 
+                                    !rounded-full !py-3 !px-4  !text-xs !min-w-[100px]
+                                    !text-center
+                                    !bg-white !text-black !font-medium uppercase
+                                    "
+                  />
+                  <Button
+                    title="sign up"
+                    className="!block break-keep 
+                                    !rounded-full !py-3 !px-4  !text-xs
+                                    !text-center !border-2 !border-white
+                                    !bg-black !font-medium uppercase
+                                    "
+                  />
+                </div>
+
+
+              </div>
+            </span>
+            <span
+              className='relative  grid place-items-center'
+            >
+              <span
+                className='absolute w-2 h-2 bg-red-500 rounded-full top-6 right-1'
+              ></span>
+              <BsBag onClick={() => navigate("/shopping-bag")}
+                className='text-slate-800  font-extralight cursor-pointer'
+                size={20}
+              />
+            </span>
+
+          </div>
+
+        </div>
+      </div>
+
+    </>
   )
 }
 

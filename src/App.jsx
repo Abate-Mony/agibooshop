@@ -18,6 +18,7 @@ import Error from './components/error';
 import DashLoging from './pages/DashLoging';
 import ProductCategory from './pages/ProductCategory';
 import ShoppingBag from './pages/ShoppingBag';
+import HomeMain from './pages/HomeMain';
 // import ImageView from './components/ImageView';
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />
+      },
+      {
+        path: "home",
+        element: <HomeMain />
       },
       {
         path: "ourstore",
